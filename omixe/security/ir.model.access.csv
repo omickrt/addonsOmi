@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_omixe_guest,access.omixe.guest,model_omixe_guest,,1,1,1,1
+access_omixe_room,access.omixe.room,model_omixe_room,,1,1,1,1
+access_omixe_transaction,access.omixe.transaction,model_omixe_transaction,,1,1,1,1
+access_omixe_transactionreport,access.omixe.transactionreport,model_omixe_transactionreport,,1,1,1,1

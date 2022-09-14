@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- omixe.guest tree view -->
+    <record id="omixe_guest_view_tree" model="ir.ui.view">
+        <field name="name">Guest</field>
+        <field name="model">omixe.guest</field>
+        <field name="arch" type="xml">
+            <tree class="tree">
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="noId"/>
+                <field name="phone"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- omixe.guest form view -->
+    <record id="omixe_guest_view_form" model="ir.ui.view">
+        <field name="name">Guest</field>
+        <field name="model">omixe.guest</field>
+        <field name="arch" type="xml">
+            <form string="Form Guest">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="name"/>
+                        <field name="noId"/>
+                        <field name="phone"/>
+                        <field name="email"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- omixe.guest action window -->
+    <record id="omixe_guest_action" model="ir.actions.act_window">
+        <field name="name">Guest</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">omixe.guest</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="omixe_guest_menu_act" 
+              name="Guest" 
+              parent="omixe_menu_root" 
+              action="omixe_guest_action" 
+              sequence="5"/>
+</odoo>

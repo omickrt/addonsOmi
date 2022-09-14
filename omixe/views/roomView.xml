@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- omixe.room tree view -->
+    <record id="omixe_room_view_tree" model="ir.ui.view">
+        <field name="name">Room Type</field>
+        <field name="model">omixe.room</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="person"/>
+                <field name="price"/>
+                <field name="avail"/>
+                <field name="transIds"/>
+                <field name="desc"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- omixe.room form view -->
+    <record id="omixe_room_view_form" model="ir.ui.view">
+        <field name="name">Room Type Form</field>
+        <field name="model">omixe.room</field>
+        <field name="arch" type="xml">
+            <form string="Room Type Form">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="name"/>
+                        <field name="person"/>
+                        <field name="price"/>
+                        <field name="avail"/>
+                    </group>
+                    <group name="Transaction" string="Transaction">
+                        <field name="transIds"/>
+                    </group>
+                    <group name="Desc" string="Description">
+                        <field name="desc"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- omixe.room action window -->
+    <record id="omixe_room_action" model="ir.actions.act_window">
+        <field name="name">Room Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">omixe.room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item Must have a parent and an action -->
+    <menuitem id="omixe_room_menu_act" 
+              name="Room Type" 
+              parent="omixe_menu_root" 
+              action="omixe_room_action"
+              sequence="8"/>
+</odoo>

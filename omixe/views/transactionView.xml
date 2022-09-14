@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- omixe.transaction tree view -->
+    <record id="omixe_transaction_view_tree" model="ir.ui.view">
+        <field name="name">Transaction List</field>
+        <field name="model">omixe.transaction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="guestId"/>
+                <field name="date"/>
+                <field name="roomId"/>
+                <field name="maks"/>
+                <field name="item"/>
+                <field name="bed"/>
+                <field name="prices"/>
+                <field name="total"/>
+                <field name="state" 
+                    decoration-primary="state == 'onprogress'" 
+                    decoration-info="state == 'confirm'"
+                    decoration-success="state == 'done'" 
+                    decoration-muted="state == 'cancel'" 
+                widget="badge"/>
+            </tree>
+        </field>
+    </record>
+    <!-- omixe.transaction form view -->
+    <record id="omixe_transaction_view_form" model="ir.ui.view">
+        <field name="name">Transaction Form</field>
+        <field name="model">omixe.transaction</field>
+        <field name="arch" type="xml">
+            <form string="Transaction Form">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn btn-primary" states="onprogress"/>
+                    <button name="action_done" type="object" string="Done" class="btn btn-primary" states="confirm" confirm="Make sure the records are correct, Continue?"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="confirm" confirm="Are you sure want to Cancel it?"/>
+                    <button name="action_onprogress" type="object" string="Make it On Progress" states="cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="onprogress,confirm,done"/>
+                </header>
+                <sheet>
+                    <group name="GuestData" string="Guest Data">
+                        <!-- Add your fields here -->
+                        <field name="name"/>
+                        <field name="guestId" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
+                        <field name="date" readonly="1"/>
+                    </group>
+                    <group name="RoomData" string="Room Data">
+                        <field name="roomId" widget="selection" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
+                        <field name="maks" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
+                        <field name="item" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
+                        <field name="bed" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
+                        <field name="prices" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
+                        <field name="total"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- omixe.transaction action window -->
+    <record id="omixe_transaction_action" model="ir.actions.act_window">
+        <field name="name">Transaction</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">omixe.transaction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="omixe_transaction_menu_act" 
+              name="Transaction" 
+              parent="omixe_booking_menu_categ" 
+              action="omixe_transaction_action" 
+              sequence="10"/>
+</odoo>

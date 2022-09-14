@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transactionreport_wizard_view_form" model="ir.ui.view">
+        <field name="name">transactionreport_wizard_view_form</field>
+        <field name="model">omixe.transactionreport</field>
+        <field name="arch" type="xml">
+            <form string="transactionreport_wizard_form">
+                <group>
+                    <field name="guestId"/>
+                </group>
+                <group>
+                    <field name="From"/>
+                    <field name="To"/>
+                </group>
+                <footer>
+                    <button name="action_transactionreport" type="object" string="Print Report" class="btn btn-primary"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+   <record id="transactionreport_wizard_action" model="ir.actions.act_window">
+       <field name="name">transactionreport_wizard_action</field>
+       <field name="type">ir.actions.act_window</field>
+       <field name="res_model">omixe.transactionreport</field>
+       <field name="view_mode">form</field>
+       <field name="view_id" ref="transactionreport_wizard_view_form"/>
+       <field name="target">new</field>
+   </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="transactionreport_wizard_menu_action"
+              name="Transaction Report"
+              parent="omixe_menu_root"
+              action="transactionreport_wizard_action"
+              sequence="15"/>
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="printreport_pdf" model="ir.actions.report" >
+        <field name="name">Print Report PDF</field>
+        <field name="model">omixe.transactionreport</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">omixe.transactionreport_pdf</field>
+        <field name="report_file">omixe.transactionreport_pdf</field>
+        <field name="binding_model_id" ref="model_omixe_transactionreport"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="print_report_pdf" model="ir.actions.report" >
+        <field name="name">Print Report</field>
+        <field name="model">omixe.transaction</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">omixe.report_pdf</field>
+        <field name="report_file">omixe.report_pdf</field>
+        <field name="binding_model_id" ref="model_omixe_transaction"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <record id="report_guest_xlsx" model="ir.actions.report" >
+        <field name="name">Guest Excel</field>
+        <field name="model">omixe.guest</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">omixe.report_guest_xlsx</field>
+        <field name="report_file">omixe.report_guest_xlsx</field>
+        <field name="binding_model_id" ref="model_omixe_guest"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <record id="report_room_xlsx" model="ir.actions.report" >
+        <field name="name">Room Excel</field>
+        <field name="model">omixe.room</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">omixe.report_room_xlsx</field>
+        <field name="report_file">omixe.report_room_xlsx</field>
+        <field name="binding_model_id" ref="model_omixe_room"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <record id="report_transaction_xlsx" model="ir.actions.report" >
+        <field name="name">Transaction Excel</field>
+        <field name="model">omixe.transaction</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">omixe.report_transaction_xlsx</field>
+        <field name="report_file">omixe.report_transaction_xlsx</field>
+        <field name="binding_model_id" ref="model_omixe_transaction"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

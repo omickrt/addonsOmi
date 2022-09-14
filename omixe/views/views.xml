@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="omixe.list">
+      <field name="name">omixe list</field>
+      <field name="model">omixe.omixe</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="omixe.action_window">
+      <field name="name">omixe window</field>
+      <field name="res_model">omixe.omixe</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="omixe.action_server">
+      <field name="name">omixe server</field>
+      <field name="model_id" ref="model_omixe_omixe"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="omixe" id="omixe.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="omixe.menu_1" parent="omixe.menu_root"/>
+    <menuitem name="Menu 2" id="omixe.menu_2" parent="omixe.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="omixe.menu_1_list" parent="omixe.menu_1"
+              action="omixe.action_window"/>
+    <menuitem name="Server to list" id="omixe" parent="omixe.menu_2"
+              action="omixe.action_server"/>
+-->
+  </data>
+</odoo>
