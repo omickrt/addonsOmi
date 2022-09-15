@@ -95,7 +95,7 @@ class transaction(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _ondelete_transaction(self):
-        if self.filtered(lambda line: line.state != 'onprogress'):
+        if self.filtered(lambda line: line.state != 'cancel'):
             raise ValidationError("Can only delete it if the status is 'Cancelled'")
         else:
             if self.roomId.transIds:
