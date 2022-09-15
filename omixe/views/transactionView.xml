@@ -9,9 +9,9 @@
             <tree>
                 <!-- Add your fields here -->
                 <field name="name"/>
-                <field name="guestId"/>
+                <field name="guest_id"/>
                 <field name="date"/>
-                <field name="roomId"/>
+                <field name="room_id"/>
                 <field name="maks"/>
                 <field name="item"/>
                 <field name="bed"/>
@@ -43,11 +43,11 @@
                     <group name="GuestData" string="Guest Data">
                         <!-- Add your fields here -->
                         <field name="name"/>
-                        <field name="guestId" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
+                        <field name="guest_id" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
                         <field name="date" readonly="1"/>
                     </group>
                     <group name="RoomData" string="Room Data">
-                        <field name="roomId" widget="selection" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
+                        <field name="room_id" widget="selection" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
                         <field name="maks" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
                         <field name="item" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>
                         <field name="bed" attrs="{'readonly': [('state', '!=', 'onprogress')]}"/>

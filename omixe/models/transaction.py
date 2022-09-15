@@ -11,8 +11,8 @@ class transaction(models.Model):
     maks = fields.Integer(string='Guests/room', required=True)
     item = fields.Integer(string='Room(s)', required=True)
     total = fields.Integer(string='Total Price (+VAT 15%)', compute='_compute_total')
-    guestId = fields.Many2one(comodel_name='omixe.guest', string='Guest List', required=True)
-    roomId = fields.Many2one(comodel_name='omixe.room', string='Room List', required=True)    
+    guest_id = fields.Many2one(comodel_name='omixe.guest', string='Guest List', required=True)
+    room_id = fields.Many2one(comodel_name='omixe.room', string='Room List', required=True)    
     bed = fields.Selection(string='Extra Bed', selection=[
                             ('noExtra', 'No Extra Bed'), 
                             ('single', 'Single Bed (+1 guest)'), 
@@ -59,27 +59,27 @@ class transaction(models.Model):
     @api.constrains('bed')
     def _check_bed(self):
         for rec in self:
-            if rec.bed == 'single' and rec.roomId.name == 'Single Room':
-                raise ValidationError('Sorry, {} is not allowed to add an extra bed.'.format(rec.roomId.name))
-            elif rec.bed == 'queen' and rec.roomId.name == 'Single Room':
-                raise ValidationError('Sorry, {} is not allowed to add an extra bed.'.format(rec.roomId.name))
-            elif rec.bed == 'single' and rec.roomId.name == 'Double Room':
-                raise ValidationError('Sorry, {} is not allowed to add an extra bed.'.format(rec.roomId.name))
-            elif rec.bed == 'queen' and rec.roomId.name == 'Double Room':
-                raise ValidationError('Sorry, {} is not allowed to add an extra bed.'.format(rec.roomId.name))
+            if rec.bed == 'single' and rec.room_id.name == 'Single Room':
+                raise ValidationError('Sorry, {} is not allowed to add an extra bed.'.format(rec.room_id.name))
+            elif rec.bed == 'queen' and rec.room_id.name == 'Single Room':
+                raise ValidationError('Sorry, {} is not allowed to add an extra bed.'.format(rec.room_id.name))
+            elif rec.bed == 'single' and rec.room_id.name == 'Double Room':
+                raise ValidationError('Sorry, {} is not allowed to add an extra bed.'.format(rec.room_id.name))
+            elif rec.bed == 'queen' and rec.room_id.name == 'Double Room':
+                raise ValidationError('Sorry, {} is not allowed to add an extra bed.'.format(rec.room_id.name))
             
             
     @api.depends('total')
     def _compute_total(self):
         for rec in self:
-            rec.total = ((rec.roomId.price * 0.15) + rec.roomId.price) * rec.item + rec.prices + (rec.prices * 0.15)
+            rec.total = ((rec.room_id.price * 0.15) + rec.room_id.price) * rec.item + rec.prices + (rec.prices * 0.15)
     
     
     @api.constrains('maks')
     def _check_maks(self):
         for rec in self:
-            if rec.maks > rec.roomId.person:
-                raise ValidationError("The maximum guest(s) in this room is {}. Please book another room or add an extra bed.".format(rec.roomId.person))
+            if rec.maks > rec.room_id.person:
+                raise ValidationError("The maximum guest(s) in this room is {}. Please book another room or add an extra bed.".format(rec.room_id.person))
             elif rec.maks < 1:
                 raise ValidationError("Please input guests more than {}".format(rec.maks))
     
@@ -89,8 +89,8 @@ class transaction(models.Model):
         for rec in self:
             if rec.item < 1:
                 raise ValidationError("Please input rooms more than {}.".format(rec.item))
-            elif (rec.roomId.avail < rec.item):
-                raise ValidationError("Sorry, {} is not available now. Please check another room.".format(rec.roomId.name))
+            elif (rec.room_id.avail < rec.item):
+                raise ValidationError("Sorry, {} is not available now. Please check another room.".format(rec.room_id.name))
 
 
     @api.ondelete(at_uninstall=False)
@@ -98,32 +98,32 @@ class transaction(models.Model):
         if self.filtered(lambda line: line.state != 'cancel'):
             raise ValidationError("Can only delete it if the status is 'Cancelled'")
         else:
-            if self.roomId.transIds:
+            if self.room_id.trans_ids:
                 a = []
                 for rec in self:
-                    a = self.env['omixe.transaction'].search([('roomId','=', rec.roomId.id)])
+                    a = self.env['omixe.transaction'].search([('room_id','=', rec.room_id.id)])
                     print(a)
                     for b in a:
-                        print(str(b.roomId.name) + ' ' + str(b.item))
-                        b.roomId.avail += b.item
+                        print(str(b.room_id.name) + ' ' + str(b.item))
+                        b.room_id.avail += b.item
     
     
     def write(self, vals):
         for rec in self:
-            a = self.env['omixe.room'].search([('transIds', '=', rec.id)])
+            a = self.env['omixe.room'].search([('trans_ids', '=', rec.id)])
             print(a)
             for data in a:
-                print(str(data.name) + ' ' + str(data.transIds.item) + ' ' + str(data.avail))
-                data.avail += data.transIds.item
+                print(str(data.name) + ' ' + str(data.trans_ids.item) + ' ' + str(data.avail))
+                data.avail += data.trans_ids.item
         res = super(transaction,self).write(vals)
         for rec in self:
-            b = self.env['omixe.room'].search([('transIds', '=', rec.id)])
+            b = self.env['omixe.room'].search([('trans_ids', '=', rec.id)])
             print(a)   
             print(b)
             for databaru in b:
                 if databaru in a:
-                    print(str(databaru.name) + ' ' + str(databaru.transIds.item) + ' ' + str(databaru.avail))
-                    databaru.avail -= databaru.transIds.item
+                    print(str(databaru.name) + ' ' + str(databaru.trans_ids.item) + ' ' + str(databaru.avail))
+                    databaru.avail -= databaru.trans_ids.item
                 else:
                     pass
         return res
@@ -133,7 +133,7 @@ class transaction(models.Model):
     def create(self, vals):
         rec = super(transaction,self).create(vals)
         if rec.item:
-            self.env['omixe.room'].search([('id', '=', rec.roomId.id)]).write({'avail': rec.roomId.avail - rec.item})
+            self.env['omixe.room'].search([('id', '=', rec.room_id.id)]).write({'avail': rec.room_id.avail - rec.item})
         return rec
     
     

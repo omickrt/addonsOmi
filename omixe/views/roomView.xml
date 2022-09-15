@@ -12,7 +12,7 @@
                 <field name="person"/>
                 <field name="price"/>
                 <field name="avail"/>
-                <field name="transIds"/>
+                <field name="trans_ids"/>
                 <field name="desc"/>
             </tree>
         </field>
@@ -33,7 +33,7 @@
                         <field name="avail"/>
                     </group>
                     <group name="Transaction" string="Transaction">
-                        <field name="transIds"/>
+                        <field name="trans_ids"/>
                     </group>
                     <group name="Desc" string="Description">
                         <field name="desc"/>

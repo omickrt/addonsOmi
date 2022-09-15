@@ -3,15 +3,12 @@
     <template id="transactionreport_pdf_tmp">
         <t t-call="web.html_container">
             <t t-call="web.internal_layout">
-
-                <!-- <t t-call="web.external_layout"> -->
                 <div class="page">
                     <h1>TRANSACTION INVOICE</h1>
-                    <!-- <t t-foreach="docs" t-as="d"> -->
                         <div class="row">
                             <div class="col-4">Guest Name :</div>
                             <div class="col-8">
-                                <t t-esc="form['transId'][1]"/>
+                                <t t-esc="form['guest_id'][1]"/>
                             </div>
                         </div>
                         <table class="table table-bordered">
@@ -42,7 +39,6 @@
                                 </tr>
                             </t>
                         </table>
-                    <!-- </t> -->
                 </div>
             </t>
         </t>

@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-4">Guest Name :</div>
                             <div class="col-8">
-                                <t t-esc="d.guestId.name"/>
+                                <t t-esc="d.guest_id.name"/>
                             </div>
                         </div>
                         <table class="table table-bordered">
@@ -28,7 +28,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <t t-foreach="d.roomId.transIds" t-as="ds">
+                            <t t-foreach="d.room_id.trans_ids" t-as="ds">
                                 <tr>
                                     <td>
                                         <span t-esc="ds.name"/>

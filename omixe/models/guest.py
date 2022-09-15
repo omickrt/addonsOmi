@@ -7,16 +7,16 @@ class guest(models.Model):
     _description = 'Guest'
 
     name = fields.Char(string='Name', required=True)
-    noId = fields.Char(string='ID Number', required=True)
+    no_id = fields.Char(string='ID Number', required=True)
     phone = fields.Char(string='Phone Number', required=True)
     email = fields.Char(string='Email')
 
         
-    @api.constrains('noId')
+    @api.constrains('no_id')
     def _check_noId(self):
         for rec in self:
-            if rec.noId:
-                a = self.env['omixe.guest'].search([('id','!=',rec.id),('noId','=',rec.noId)])
+            if rec.no_id:
+                a = self.env['omixe.guest'].search([('id','!=',rec.id),('no_id','=',rec.no_id)])
                 if a:
                     raise ValidationError("ID Number was already existed.")
 

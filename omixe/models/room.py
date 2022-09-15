@@ -17,6 +17,10 @@ class room(models.Model):
     
     person = fields.Integer(string='Max Guests')
     price = fields.Integer(string='Price List (not include VAT)')
+    avail = fields.Integer(string='Availability (Room)')
+    trans_ids = fields.One2many(comodel_name='omixe.transaction', inverse_name='room_id', string='Transaction List')
+    desc = fields.Char(string='Description')
+    
     
     @api.onchange('name')
     def _onchange_name(self):
@@ -44,9 +48,6 @@ class room(models.Model):
     
     
     
-    avail = fields.Integer(string='Availability (Room)')
-    transIds = fields.One2many(comodel_name='omixe.transaction', inverse_name='roomId', string='Transaction List')
-    desc = fields.Char(string='Description')
     
     
     

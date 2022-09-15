@@ -1,21 +1,21 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class transactionReport(models.TransientModel):
     _name = 'omixe.transactionreport'
     _description = 'Description'
 
-    transId = fields.Many2one(comodel_name='omixe.transaction', string='Guest')
+    guest_id = fields.Many2one(comodel_name='omixe.guest', string='Guest')
     From = fields.Date(string='From')
     To = fields.Date(string='To')
 
     def action_transactionreport(self):
         filter = []
-        transId = self.transId
+        guest_id = self.guest_id
         From = self.From
         To = self.To
-        if transId:
-            filter += [('guestId', '=', transId.id)]
+        if guest_id:
+            filter += [('name', '=', guest_id.id)]
         if From:
             filter += [('date', '>=', From)]
         if To:

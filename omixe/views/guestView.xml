@@ -9,7 +9,7 @@
             <tree class="tree">
                 <!-- Add your fields here -->
                 <field name="name"/>
-                <field name="noId"/>
+                <field name="no_id"/>
                 <field name="phone"/>
                 <field name="email"/>
             </tree>
@@ -26,7 +26,7 @@
                     <group>
                         <!-- Add your fields here -->
                         <field name="name"/>
-                        <field name="noId"/>
+                        <field name="no_id"/>
                         <field name="phone"/>
                         <field name="email"/>
                     </group>
