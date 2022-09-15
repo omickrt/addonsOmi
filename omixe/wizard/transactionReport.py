@@ -5,17 +5,17 @@ class transactionReport(models.TransientModel):
     _name = 'omixe.transactionreport'
     _description = 'Description'
 
-    guestId = fields.Many2one(comodel_name='omixe.guest', string='Guest')
+    transId = fields.Many2one(comodel_name='omixe.transaction', string='Guest')
     From = fields.Date(string='From')
     To = fields.Date(string='To')
 
     def action_transactionreport(self):
         filter = []
-        guestId = self.guestId
+        transId = self.transId
         From = self.From
         To = self.To
-        if guestId:
-            filter += [('name', '=', guestId.id)]
+        if transId:
+            filter += [('guestId', '=', transId.id)]
         if From:
             filter += [('date', '>=', From)]
         if To:

@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-4">Guest Name :</div>
                             <div class="col-8">
-                                <t t-esc="form['guestId'][1]"/>
+                                <t t-esc="form['transId'][1]"/>
                             </div>
                         </div>
                         <table class="table table-bordered">

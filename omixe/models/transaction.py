@@ -10,7 +10,7 @@ class transaction(models.Model):
     date = fields.Datetime(string='Transaction Date', default=fields.Datetime.now())
     maks = fields.Integer(string='Guests/room', required=True)
     item = fields.Integer(string='Room(s)', required=True)
-    total = fields.Integer(string='Total Price (+VAT)', compute='_compute_total')
+    total = fields.Integer(string='Total Price (+VAT 15%)', compute='_compute_total')
     guestId = fields.Many2one(comodel_name='omixe.guest', string='Guest List', required=True)
     roomId = fields.Many2one(comodel_name='omixe.room', string='Room List', required=True)    
     bed = fields.Selection(string='Extra Bed', selection=[

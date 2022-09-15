@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <form string="transactionreport_wizard_form">
                 <group>
-                    <field name="guestId"/>
+                    <field name="transId"/>
                 </group>
                 <group>
                     <field name="From"/>
