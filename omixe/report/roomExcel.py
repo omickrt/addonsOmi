@@ -24,7 +24,7 @@ class partnerXlsx(models.Model):
             sheet.write(row, col+1, obj.person)
             sheet.write(row, col+2, obj.price)
             sheet.write(row, col+3, obj.avail)
-            for x in obj.transidds:
+            for x in obj.trans_ids:
                 sheet.write(row, col+4, x.guest_id.name)
                 col += 1
             row+=1
